@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { signInWithAuthUserWithEmailAndPassword } from "../../util/firebase/firebase.js";
+
 const defaultFormField = {
   email: "",
   password: "",
@@ -17,13 +18,11 @@ const SignInForm = () => {
     event.preventDefault();
 
     try {
-      const { user } = await signInWithAuthUserWithEmailAndPassword(
-        email,
-        password
-      );
-      console.log(user);
+      await signInWithAuthUserWithEmailAndPassword(email, password);
       resetFormFields();
-    } catch (error) {}
+    } catch (error) {
+      alert(error.message);
+    }
   };
 
   const handleChange = (event) => {

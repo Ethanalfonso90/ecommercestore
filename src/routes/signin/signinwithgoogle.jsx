@@ -8,7 +8,7 @@ import SignInForm from "../../components/signinform/signinform.jsx";
 const SignIn = () => {
   const logGoogleUser = async () => {
     const { user } = await signInWithGooglePopup();
-    const userDocRef = await createUserDocumentFromAuth(user);
+    await createUserDocumentFromAuth(user);
   };
 
   return (
