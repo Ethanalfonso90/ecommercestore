@@ -15,7 +15,7 @@ import {
   doc,
   getDoc,
   setDoc,
-  Firestore,
+  // Firestore,
 } from "firebase/firestore";
 
 // Your web app's Firebase configuration
@@ -29,7 +29,8 @@ const firebaseConfig = {
 };
 
 // Initialize Firebase
-const firebaseApp = initializeApp(firebaseConfig);
+// const firebaseApp =
+initializeApp(firebaseConfig);
 
 const provider = new GoogleAuthProvider();
 
