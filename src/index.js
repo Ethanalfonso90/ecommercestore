@@ -6,13 +6,17 @@ import App from "./App";
 import { UserProvider } from "./context/user.context";
 import { ProductsProvider } from "./context/products.jsx";
 import reportWebVitals from "./reportWebVitals";
+import { Elements } from "@stripe/react-stripe-js";
+import { stripePromise } from "./util/stripe/stripe";
 
 ReactDOM.render(
   <React.StrictMode>
     <BrowserRouter>
       <UserProvider>
         <ProductsProvider>
-          <App />
+          <Elements stripe={stripePromise}>
+            <App />
+          </Elements>
         </ProductsProvider>
       </UserProvider>
     </BrowserRouter>
