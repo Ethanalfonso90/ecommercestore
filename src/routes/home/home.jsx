@@ -1,5 +1,3 @@
-import "../../App.css";
-import "../../app.style.scss";
 import Category from "../../components/category/category";
 
 const Home = () => {

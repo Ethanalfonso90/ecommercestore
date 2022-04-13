@@ -1,14 +1,16 @@
 const ProductCard = ({ product }) => {
   const { name, price, imageUrl } = product;
   return (
-    <div>
-      <img src={imageUrl} alt={`${name}`} />
-      <div>
-        <span>{name}</span>
-        <br />
-        <span>{price}</span>
+    <div className="column">
+      <div className="ui card">
+        <img src={imageUrl} alt={`${name}`} />
+        <div className="content">
+          <span>{name.toUpperCase()}</span>
+          <br />
+          <span>${price}</span>
+        </div>
+        <button className="fluid ui button primary">Add to Card</button>
       </div>
-      <button>Add to Card</button>
     </div>
   );
 };

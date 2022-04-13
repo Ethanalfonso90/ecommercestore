@@ -5,18 +5,18 @@ const Shop = () => {
   const categoryMap = useContext(ProductsContext);
 
   return (
-    <React.Fragment>
+    <div className="ui container">
       {Object.keys(categoryMap).map((title) => (
-        <React.Fragment key={title}>
+        <div className="ui container" key={title}>
           <h2>{title}</h2>
-          <div>
+          <div className="ui stackable five column grid">
             {categoryMap[title].map((product) => (
               <ProductCard key={product.id} product={product} />
             ))}
           </div>
-        </React.Fragment>
+        </div>
       ))}
-    </React.Fragment>
+    </div>
   );
 };
 

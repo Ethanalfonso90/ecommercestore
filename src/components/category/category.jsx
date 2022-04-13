@@ -1,19 +1,24 @@
 const Category = ({ categories }) => {
   return (
-    <div className="categories-container">
-      <div className="categories-container">
+    <div className="ui grid container centered">
+      <div className="ui stackable four column grid">
         {categories.map((product) => (
-          // const {id, imageUrl, title} = product;
-          <div
-            className="category-container category-body-container"
-            key={product.id}
-          >
-            <div
-              className="background-image"
-              style={{ backgroundImage: `url(${product.imageUrl})` }}
-            />
-            <h1>{product.title}</h1>
-            <p>Shop Now</p>
+          <div className="column" key={product.id}>
+            <div className="ui special cards centered" key={product.id}>
+              <div className="card">
+                <h1>{product.title.toUpperCase()}</h1>
+                <div className="blurring dimmable image">
+                  <div className="ui dimmer">
+                    <div className="content">
+                      <div className="center">
+                        <div className="ui inverted button">Shop Now</div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <img alt="imageUrl" src={`${product.imageUrl}`} />
+              </div>
+            </div>
           </div>
         ))}
       </div>
@@ -22,3 +27,4 @@ const Category = ({ categories }) => {
 };
 
 export default Category;
+// style={{ backgroundImage: `url(${product.imageUrl})` }}
