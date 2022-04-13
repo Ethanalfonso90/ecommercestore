@@ -7,7 +7,6 @@ const SignIn = () => {
       <div className="ui vertically divided grid">
         <div className="two column row">
           <div className="column">
-            <h1>Sign In</h1>
             <SignInForm />
           </div>
           <div className="column">

@@ -38,7 +38,8 @@ const SignInForm = () => {
   };
 
   return (
-    <div>
+    <div className="ui secondary segment">
+      <h1>Sign In</h1>
       <form className="ui form" onSubmit={handleSubmit}>
         <div className="field">
           <label>Email</label>
@@ -50,20 +51,26 @@ const SignInForm = () => {
             value={email}
           />
         </div>
-        <label>Password</label>
-        <input
-          type="password"
-          required
-          onChange={handleChange}
-          name="password"
-          value={password}
-        />
-        <button className="ui button" type="submit">
-          Sign In
-        </button>
-        <button className="ui button primary" onClick={logGoogleUser}>
-          Sign In With Google Popup
-        </button>
+        <div className="field">
+          <label>Password</label>
+          <input
+            type="password"
+            required
+            onChange={handleChange}
+            name="password"
+            value={password}
+          />
+        </div>
+        <div className="field">
+          <div className="ui centred">
+            <button className="ui submit button" type="submit">
+              Sign In
+            </button>
+            <button className="ui button primary" onClick={logGoogleUser}>
+              Sign In With Google Popup
+            </button>
+          </div>
+        </div>
       </form>
     </div>
   );
