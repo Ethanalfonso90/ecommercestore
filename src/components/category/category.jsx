@@ -4,7 +4,7 @@ const Category = ({ categories }) => {
       <div className="ui stackable four column grid">
         {categories.map((product) => (
           <div className="column" key={product.id}>
-            <div className="ui special cards centered" key={product.id}>
+            <div className="ui link special cards" key={product.id}>
               <div className="card">
                 <h1>{product.title.toUpperCase()}</h1>
                 <div className="blurring dimmable image">
