@@ -31,7 +31,7 @@ const Navigation = () => {
               Sign In
             </Link>
           )}
-          <div className="item ui button">
+          <div className="ui button">
             <CartIcon />
           </div>
         </div>
