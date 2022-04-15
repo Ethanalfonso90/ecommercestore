@@ -44,7 +44,7 @@ const PaymentForm = () => {
   return (
     <form onSubmit={paymentHandler}>
       <CardElement />
-      <button type="submit" className={`ui button`}>
+      <button type="submit" className="ui button">
         Pay Now
       </button>
     </form>
