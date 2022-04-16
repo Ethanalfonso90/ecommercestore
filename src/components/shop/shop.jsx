@@ -1,6 +1,7 @@
 import React, { useContext } from "react";
 import { ProductsContext } from "../../context/products";
 import ProductCard from "../productcard/ProductCard";
+
 const Shop = () => {
   const categoryMap = useContext(ProductsContext);
 
@@ -9,7 +10,7 @@ const Shop = () => {
       {Object.keys(categoryMap).map((title) => (
         <div className="ui container segment secondary" key={title}>
           <h2>{title}</h2>
-          <div className="ui stackable four column grid">
+          <div className="ui stackable three column grid">
             {categoryMap[title].map((product) => (
               <ProductCard key={product.id} product={product} />
             ))}

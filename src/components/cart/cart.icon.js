@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 const CartIcon = ({ cartItems }) => {
   // const { id, name, imageUrl, price,  } = cartItems;
 
@@ -22,6 +23,11 @@ const CartIcon = ({ cartItems }) => {
               </div>
             );
           })}
+          <div className="fluid primary ui button">
+            <Link className="item" to="/payment">
+              Checkout
+            </Link>
+          </div>
         </div>
       </div>
     </div>
