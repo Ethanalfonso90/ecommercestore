@@ -4,9 +4,12 @@ import { ReactComponent as CrwnLogo } from "../../assets/crown.svg";
 import { UserContext } from "../../context/user.context";
 import { signOutUser } from "../../util/firebase/firebase.js";
 import CartIcon from "../cart/cart.icon";
+import { CartContext } from "../../context/cart.context";
 
 const Navigation = () => {
   const { currentUser } = useContext(UserContext);
+
+  const { cartItems } = useContext(CartContext);
 
   const signOutHandler = async () => {
     await signOutUser();
@@ -31,9 +34,7 @@ const Navigation = () => {
               Sign In
             </Link>
           )}
-          <div className="item ui button">
-            <CartIcon />
-          </div>
+          <CartIcon cartItems={cartItems} />
         </div>
       </div>
       <Outlet />

@@ -7,15 +7,18 @@ import { ProductsProvider } from "./context/products.jsx";
 import reportWebVitals from "./reportWebVitals";
 import { Elements } from "@stripe/react-stripe-js";
 import { stripePromise } from "./util/stripe/stripe";
+import { CartProvider } from "./context/cart.context.jsx";
 
 ReactDOM.render(
   <React.StrictMode>
     <BrowserRouter>
       <UserProvider>
         <ProductsProvider>
-          <Elements stripe={stripePromise}>
-            <App />
-          </Elements>
+          <CartProvider>
+            <Elements stripe={stripePromise}>
+              <App />
+            </Elements>
+          </CartProvider>
         </ProductsProvider>
       </UserProvider>
     </BrowserRouter>
