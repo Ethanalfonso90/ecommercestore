@@ -5,16 +5,18 @@ import { Routes, Route } from "react-router-dom";
 import SignIn from "./routes/signin/signinwithgoogle.jsx";
 import PaymentForm from "./components/paymentform/paymentform";
 import Checkout from "./components/checkout/checkout.jsx";
+import ShopAll from "./components/shop/shopall";
 
 const App = () => {
   return (
     <Routes>
       <Route path="/" element={<Navigation />}>
         <Route index element={<Home />} />
-        <Route path="shop" element={<Shop />} />
-        <Route path="signin" element={<SignIn />} />
-        <Route path="payment" element={<PaymentForm />} />
-        <Route path="checkout" element={<Checkout />}></Route>
+        <Route exact path="shop" element={<ShopAll />} />
+        <Route exact path="shop/:title" element={<Shop />} />
+        <Route exact path="signin" element={<SignIn />} />
+        <Route exact path="payment" element={<PaymentForm />} />
+        <Route path="*" element={<Checkout />}></Route>
       </Route>
     </Routes>
   );
