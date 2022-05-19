@@ -67,7 +67,7 @@ const SignInForm = () => {
               Sign In
             </button>
             <button className="ui button primary" onClick={logGoogleUser}>
-              Sign In With Google Popup
+              Sign In with Gmail
             </button>
           </div>
         </div>
