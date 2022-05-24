@@ -7,20 +7,24 @@ import { ProductsProvider } from "./context/products.jsx";
 import { Elements } from "@stripe/react-stripe-js";
 import { stripePromise } from "./util/stripe/stripe";
 import { CartProvider } from "./context/cart.context.jsx";
+import theme from "./util/theme/theme";
+import { ThemeProvider } from "@material-ui/core/styles";
 
 ReactDOM.render(
   <React.StrictMode>
-    <BrowserRouter>
-      <UserProvider>
-        <ProductsProvider>
-          <CartProvider>
-            <Elements stripe={stripePromise}>
-              <App />
-            </Elements>
-          </CartProvider>
-        </ProductsProvider>
-      </UserProvider>
-    </BrowserRouter>
+    <ThemeProvider theme={theme}>
+      <BrowserRouter>
+        <UserProvider>
+          <ProductsProvider>
+            <CartProvider>
+              <Elements stripe={stripePromise}>
+                <App />
+              </Elements>
+            </CartProvider>
+          </ProductsProvider>
+        </UserProvider>
+      </BrowserRouter>
+    </ThemeProvider>
   </React.StrictMode>,
   document.getElementById("root")
 );
