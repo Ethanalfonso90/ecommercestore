@@ -1,17 +1,18 @@
-import { Fragment, useContext, useState } from "react";
+import { Fragment, useState } from "react";
+// import { useContext } from "react";
 import { Outlet, Link } from "react-router-dom";
 import { ReactComponent as CrwnLogo } from "../../assets/crown.svg";
-import { UserContext } from "../../context/user.context";
-import { signOutUser } from "../../util/firebase/firebase.js";
-import CartIcon from "../cart/cart.icon";
-import { CartContext } from "../../context/cart.context";
+// import { UserContext } from "../../context/user.context";
+// import { signOutUser } from "../../util/firebase/firebase.js";
+// import CartIcon from "../cart/cart.icon";
+// import { CartContext } from "../../context/cart.context";
 
 // material ui imports
 import AppBar from "@material-ui/core/AppBar";
 import Container from "@material-ui/core/Container";
 import Toolbar from "@material-ui/core/Toolbar";
 import IconButton from "@mui/material/IconButton";
-import MenuIcon from "@mui/icons-material/Menu";
+// import MenuIcon from "@mui/icons-material/Menu";
 import {
   Avatar,
   Box,
@@ -30,29 +31,30 @@ const pages = [
 const settings = ["Profile", "Account", "Dashboard", "Logout"];
 
 const Navigation = () => {
-  const { currentUser } = useContext(UserContext);
-  const { cartItems } = useContext(CartContext);
+  // const { currentUser } = useContext(UserContext);
+  // const { cartItems } = useContext(CartContext);
   const [anchorElNav, setAnchorElNav] = useState(null);
   const [anchorElUser, setAnchorElUser] = useState(null);
 
-  const handleOpenNavMenu = (event) => {
-    setAnchorElNav(event.currentTarget);
-  };
+  // const handleOpenNavMenu = (event) => {
+  //   setAnchorElNav(event.currentTarget);
+  // };
   const handleOpenUserMenu = (event) => {
     setAnchorElUser(event.currentTarget);
   };
 
   const handleCloseNavMenu = () => {
     setAnchorElNav(null);
+    setAnchorElNav(anchorElNav);
   };
 
   const handleCloseUserMenu = () => {
     setAnchorElUser(null);
   };
 
-  const signOutHandler = async () => {
-    await signOutUser();
-  };
+  // const signOutHandler = async () => {
+  //   await signOutUser();
+  // };
 
   return (
     <Fragment>

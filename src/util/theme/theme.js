@@ -1,14 +1,15 @@
 import { createTheme } from "@material-ui/core/styles";
-import purple from "@material-ui/core/colors/purple";
 import green from "@material-ui/core/colors/green";
+
+const mainOrange = `#efab45`;
 
 export default createTheme({
   palette: {
     common: {
-      test: "#007289",
+      mainOrange: mainOrange,
     },
     primary: {
-      main: purple[500],
+      main: mainOrange,
     },
     secondary: {
       main: green[500],
