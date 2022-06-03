@@ -19,10 +19,14 @@ import {
   MenuItem,
   Tooltip,
   Typography,
+  Button,
 } from "@mui/material";
 // import NavigationBar from "./Appbar";
 
-const pages = ["Products", "Pricing", "Blog"];
+const pages = [
+  { name: "Shop", link: "/shop" },
+  { name: "Sign In", link: "/signin" },
+];
 const settings = ["Profile", "Account", "Dashboard", "Logout"];
 
 const Navigation = () => {
@@ -49,20 +53,40 @@ const Navigation = () => {
   const signOutHandler = async () => {
     await signOutUser();
   };
-  // <CrwnLogo sx={{ display: { xs: "none", md: "flex" }, mr: 1 }} />
+
   return (
     <Fragment>
       <AppBar position="static">
         <Container>
           <Toolbar>
             <IconButton
+              disableRipple
+              sx={{ p: 0, mr: 2 }}
               edge="start"
               color="inherit"
               aria-label="menu"
-              sx={{ mr: 2 }}
             >
-              <MenuIcon />
+              <Link className="item" to="/">
+                <CrwnLogo />
+              </Link>
             </IconButton>
+            <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}>
+              {pages.map((page) => (
+                <Button
+                  LinkComponent={Link}
+                  to={page.link}
+                  key={page.name}
+                  onClick={handleCloseNavMenu}
+                  sx={{
+                    my: 2,
+                    color: "white",
+                    display: "block",
+                  }}
+                >
+                  {page.name}
+                </Button>
+              ))}
+            </Box>
             <Box sx={{ flexGrow: 0 }}>
               <Tooltip title="Open settings">
                 <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
@@ -95,29 +119,31 @@ const Navigation = () => {
           </Toolbar>
         </Container>
       </AppBar>
-      <div className="ui secondary menu">
-        <Link className="item" to="/">
-          <CrwnLogo />
-        </Link>
-        <div className="right menu">
-          <Link className="item ui button" to="/shop">
-            Shop
-          </Link>
-          {currentUser ? (
-            <span className="item ui button" onClick={signOutHandler}>
-              Sign Out
-            </span>
-          ) : (
-            <Link className="item ui button" to="/signin">
-              Sign In
-            </Link>
-          )}
-          <CartIcon cartItems={cartItems} />
-        </div>
-      </div>
       <Outlet />
     </Fragment>
   );
 };
 
 export default Navigation;
+
+// <div className="ui secondary menu">
+// <Link className="item" to="/">
+//   <CrwnLogo />
+// </Link>
+// <div className="right menu">
+//   <Link className="item ui button" to="/shop">
+//     Shop
+//   </Link>
+//   {currentUser ? (
+//     <span className="item ui button" onClick={signOutHandler}>
+//       Sign Out
+//     </span>
+//   ) : (
+//     <Link className="item ui button" to="/signin">
+//       Sign In
+//     </Link>
+//   )}
+//   <CartIcon cartItems={cartItems} />
+// </div>
+// </div>
+// <Outlet />
