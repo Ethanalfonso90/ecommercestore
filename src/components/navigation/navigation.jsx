@@ -1,12 +1,11 @@
-import { Fragment, useState } from "react";
-// import { useContext } from "react";
+import { Fragment, useState, useContext } from "react";
 import { Outlet, Link } from "react-router-dom";
 import { ReactComponent as CrwnLogo } from "../../assets/crown.svg";
 // import { UserContext } from "../../context/user.context";
 // import { signOutUser } from "../../util/firebase/firebase.js";
-// import CartIcon from "../cart/cart.icon";
-// import { CartContext } from "../../context/cart.context";
-
+import CartIcon from "../cart/cart.icon";
+import { CartContext } from "../../context/cart.context";
+import ShoppingCartIcon from "@material-ui/icons/ShoppingCart";
 // material ui imports
 import AppBar from "@material-ui/core/AppBar";
 import Container from "@material-ui/core/Container";
@@ -35,9 +34,10 @@ const settings = ["Profile", "Account", "Dashboard", "Logout"];
 
 const Navigation = () => {
   // const { currentUser } = useContext(UserContext);
-  // const { cartItems } = useContext(CartContext);
+  const { cartItems } = useContext(CartContext);
   const [anchorElNav, setAnchorElNav] = useState(null);
   const [anchorElUser, setAnchorElUser] = useState(null);
+  const [anchorElUserCart, setAnchorElUserCart] = useState(null);
   const [value, setValue] = useState("");
 
   const handleSearchChange = (event) => {
@@ -49,6 +49,14 @@ const Navigation = () => {
   // };
   const handleOpenUserMenu = (event) => {
     setAnchorElUser(event.currentTarget);
+  };
+
+  const handleOpenUserCart = (event) => {
+    setAnchorElUserCart(event.currentTarget);
+  };
+
+  const handleCloseUserCart = (event) => {
+    setAnchorElUserCart(null);
   };
 
   const handleCloseNavMenu = () => {
@@ -122,7 +130,6 @@ const Navigation = () => {
                   <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" />
                 </IconButton>
               </Tooltip>
-
               <Menu
                 sx={{ mt: "45px" }}
                 id="menu-appbar"
@@ -144,6 +151,31 @@ const Navigation = () => {
                     <Typography textAlign="center">{setting}</Typography>
                   </MenuItem>
                 ))}
+              </Menu>
+            </Box>
+            <Box sx={{ flexGrow: 0 }}>
+              <Tooltip title="Cart Items">
+                <IconButton onClick={handleOpenUserCart} sx={{ p: 0 }}>
+                  <ShoppingCartIcon style={{ padding: "10px" }} />
+                </IconButton>
+              </Tooltip>
+              <Menu
+                sx={{ mt: "45px" }}
+                id="menu-appbar"
+                anchorEl={anchorElUserCart}
+                anchorOrigin={{
+                  vertical: "top",
+                  horizontal: "right",
+                }}
+                keepMounted
+                transformOrigin={{
+                  vertical: "top",
+                  horizontal: "right",
+                }}
+                open={Boolean(anchorElUserCart)}
+                onClose={handleCloseUserCart}
+              >
+                <CartIcon cartItems={cartItems} />
               </Menu>
             </Box>
           </Toolbar>
