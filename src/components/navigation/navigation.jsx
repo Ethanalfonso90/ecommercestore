@@ -13,6 +13,8 @@ import Container from "@material-ui/core/Container";
 import Toolbar from "@material-ui/core/Toolbar";
 import IconButton from "@mui/material/IconButton";
 // import MenuIcon from "@mui/icons-material/Menu";
+import InputAdornment from "@material-ui/core/InputAdornment";
+import SearchIcon from "@material-ui/icons/Search";
 import {
   Avatar,
   Box,
@@ -21,6 +23,7 @@ import {
   Tooltip,
   Typography,
   Button,
+  TextField,
 } from "@mui/material";
 // import NavigationBar from "./Appbar";
 
@@ -35,6 +38,11 @@ const Navigation = () => {
   // const { cartItems } = useContext(CartContext);
   const [anchorElNav, setAnchorElNav] = useState(null);
   const [anchorElUser, setAnchorElUser] = useState(null);
+  const [value, setValue] = useState("");
+
+  const handleSearchChange = (event) => {
+    setValue(event.currentTarget.value);
+  };
 
   // const handleOpenNavMenu = (event) => {
   //   setAnchorElNav(event.currentTarget);
@@ -72,7 +80,13 @@ const Navigation = () => {
                 <CrwnLogo />
               </Link>
             </IconButton>
-            <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}>
+            <Box
+              sx={{
+                flexGrow: 1,
+                display: { xs: "none", md: "flex" },
+                flexDirection: "row-reverse",
+              }}
+            >
               {pages.map((page) => (
                 <Button
                   LinkComponent={Link}
@@ -88,6 +102,19 @@ const Navigation = () => {
                   {page.name}
                 </Button>
               ))}
+              <TextField
+                sx={{ padding: "10px" }}
+                value={value}
+                placeholder="search"
+                onChange={handleSearchChange}
+                InputProps={{
+                  startAdornment: (
+                    <InputAdornment position="start">
+                      <SearchIcon />
+                    </InputAdornment>
+                  ),
+                }}
+              />
             </Box>
             <Box sx={{ flexGrow: 0 }}>
               <Tooltip title="Open settings">
@@ -95,6 +122,7 @@ const Navigation = () => {
                   <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" />
                 </IconButton>
               </Tooltip>
+
               <Menu
                 sx={{ mt: "45px" }}
                 id="menu-appbar"
