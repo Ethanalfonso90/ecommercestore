@@ -24,7 +24,7 @@ import {
   Button,
   TextField,
 } from "@mui/material";
-// import NavigationBar from "./Appbar";
+import NavigationBar from "./Appbar";
 
 const pages = [
   { name: "Shop", link: "/shop" },
@@ -181,6 +181,7 @@ const Navigation = () => {
           </Toolbar>
         </Container>
       </AppBar>
+      <NavigationBar />
       <Outlet />
     </Fragment>
   );
