@@ -2,8 +2,29 @@ import { useState } from "react";
 import Box from "@mui/material/Box";
 import Tabs from "@mui/material/Tabs";
 import Tab from "@mui/material/Tab";
-import Popover from "@mui/material/Popover";
-import ModalLink from "./ModalMenu";
+import Menu from "@mui/material/Menu";
+import MenuItem from "@mui/material/MenuItem";
+import Fade from "@mui/material/Fade";
+
+function createData(women, men, brand, era, size) {
+  return { women, men, brand, era, size };
+}
+
+const rows = [
+  createData("ALL WOMEN'S SALE", 159, 6.0, 24, 4.0),
+  createData("BLOUSES & TOPS", 237, 9.0, 37, 4.3),
+  createData("COATS", 262, 16.0, 24, 6.0),
+  createData("DRESSES", 305, 3.7, 67, 4.3),
+  createData("JACKETS", 356, 16.0, 49, 3.9),
+  createData("JEANS", 159, 6.0, 24, 4.0),
+  createData("KNITS", 237, 9.0, 37, 4.3),
+  createData("SHORTS", 262, 16.0, 24, 6.0),
+  createData("SKIRTS", 305, 3.7, 67, 4.3),
+  createData("SWEATSHIRTS", 356, 16.0, 49, 3.9),
+  createData("SWIMWEAR", 262, 16.0, 24, 6.0),
+  createData("T-SHIRTS", 305, 3.7, 67, 4.3),
+  createData("TROUSERS", 356, 16.0, 49, 3.9),
+];
 
 const tabs = [
   "SALE",
@@ -20,11 +41,11 @@ const tabs = [
 export default function CenteredTabs() {
   const [value, setValue] = useState(0);
   const [anchorEl, setAnchorEl] = useState(null);
-  const [modalName, setModalName] = useState(null);
 
   const handlePopoverOpen = (event) => {
     setAnchorEl(event.currentTarget);
-    setModalName(event.currentTarget.innerText);
+
+    console.log("mouse entered");
   };
 
   const handlePopoverClose = () => {
@@ -34,7 +55,10 @@ export default function CenteredTabs() {
   const handleChange = (event, newValue) => {
     setValue(newValue);
   };
-
+  // const handleClose = () => {
+  //   setAnchorEl(null);
+  //   console.log("mouse out");
+  // };
   const open = Boolean(anchorEl);
   return (
     <Box sx={{ width: "100%", bgcolor: "background.paper" }}>
@@ -43,26 +67,42 @@ export default function CenteredTabs() {
           return <Tab key={tab} label={tab} onMouseEnter={handlePopoverOpen} />;
         })}
       </Tabs>
-      <Popover
-        id="mouse-over-popover"
-        sx={{
-          pointerEvents: "none",
+      <Menu
+        id="fade-menu"
+        MenuListProps={{
+          "aria-labelledby": "fade-button",
         }}
-        open={open}
         anchorEl={anchorEl}
-        anchorOrigin={{
-          vertical: "bottom",
-          horizontal: "left",
-        }}
-        transformOrigin={{
-          vertical: "top",
-          horizontal: "left",
-        }}
+        open={open}
         onClose={handlePopoverClose}
-        disableRestoreFocus
+        TransitionComponent={Fade}
       >
-        <ModalLink name={modalName} />
-      </Popover>
+        {rows.map((list) => (
+          <MenuItem key={list.women} onClick={handlePopoverClose}>
+            {list.women}
+          </MenuItem>
+        ))}
+      </Menu>
     </Box>
   );
 }
+
+// <Popover
+// id="mouse-over-popover"
+// sx={{
+//   pointerEvents: "none",
+// }}
+// open={open}
+// anchorEl={anchorEl}
+// anchorOrigin={{
+//   vertical: "bottom",
+//   horizontal: "center",
+// }}
+// transformOrigin={{
+//   vertical: "top",
+//   horizontal: "center",
+// }}
+// onClose={handlePopoverClose}
+// disableRestoreFocus
+// >
+// </Popover>
