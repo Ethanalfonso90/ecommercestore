@@ -41,36 +41,35 @@ const tabs = [
 export default function CenteredTabs() {
   const [value, setValue] = useState(0);
   const [anchorEl, setAnchorEl] = useState(null);
-
+  let open = Boolean(anchorEl);
   const handlePopoverOpen = (event) => {
     setAnchorEl(event.currentTarget);
-
-    console.log("mouse entered");
+    open = Boolean(anchorEl);
+    // console.log(Boolean(anchorEl));
   };
 
   const handlePopoverClose = () => {
     setAnchorEl(null);
+    open = Boolean(anchorEl);
   };
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
   };
-  // const handleClose = () => {
-  //   setAnchorEl(null);
-  //   console.log("mouse out");
-  // };
-  const open = Boolean(anchorEl);
+
+  // const open = Boolean(anchorEl);
   return (
     <Box sx={{ width: "100%", bgcolor: "background.paper" }}>
       <Tabs value={value} onChange={handleChange} centered>
         {tabs.map((tab) => {
-          return <Tab key={tab} label={tab} onMouseEnter={handlePopoverOpen} />;
+          return <Tab key={tab} label={tab} onMouseOver={handlePopoverOpen} />;
         })}
       </Tabs>
       <Menu
         id="fade-menu"
         MenuListProps={{
           "aria-labelledby": "fade-button",
+          onMouseLeave: handlePopoverClose,
         }}
         anchorEl={anchorEl}
         open={open}
