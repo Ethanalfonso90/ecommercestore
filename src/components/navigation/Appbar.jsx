@@ -4,6 +4,7 @@ import Tabs from "@mui/material/Tabs";
 import Tab from "@mui/material/Tab";
 import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
+
 import Fade from "@mui/material/Fade";
 
 function createData(women, men, brand, era, size) {
@@ -27,42 +28,49 @@ const rows = [
 ];
 
 const tabs = [
-  "SALE",
-  "NEW IN",
-  "WOMEN",
-  "MEN",
-  "KIDS",
-  "BRANDS",
-  "SPORTSWEAR",
-  "DENIM",
-  "BLOG",
+  { name: "SALE", index: 0, href: "#" },
+  { name: "NEW IN", index: 1, href: "#" },
+  { name: "WOMEN", index: 2, href: "#" },
+  { name: "MEN", index: 3, href: "#" },
+  { name: "KIDS", index: 4, href: "#" },
+  { name: "BRANDS", index: 5, href: "#" },
+  { name: "SPORTSWEAR", index: 6, href: "#" },
+  { name: "DENIM", index: 7, href: "#" },
+  { name: "BLOG", index: 8, href: "#" },
 ];
 
 export default function CenteredTabs() {
   const [value, setValue] = useState(0);
   const [anchorEl, setAnchorEl] = useState(null);
-  let open = Boolean(anchorEl);
+  const [open, setOpen] = useState(false);
+
   const handlePopoverOpen = (event) => {
     setAnchorEl(event.currentTarget);
-    open = Boolean(anchorEl);
-    // console.log(Boolean(anchorEl));
+    setOpen(true);
+    setValue(event.currentTarget.tabIndex);
   };
 
   const handlePopoverClose = () => {
     setAnchorEl(null);
-    open = Boolean(anchorEl);
+    setOpen(false);
   };
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
   };
 
-  // const open = Boolean(anchorEl);
   return (
     <Box sx={{ width: "100%", bgcolor: "background.paper" }}>
       <Tabs value={value} onChange={handleChange} centered>
         {tabs.map((tab) => {
-          return <Tab key={tab} label={tab} onMouseOver={handlePopoverOpen} />;
+          return (
+            <Tab
+              tabIndex={tab.index}
+              key={tab.name}
+              label={tab.name}
+              onMouseOver={handlePopoverOpen}
+            />
+          );
         })}
       </Tabs>
       <Menu
@@ -86,22 +94,20 @@ export default function CenteredTabs() {
   );
 }
 
-// <Popover
-// id="mouse-over-popover"
-// sx={{
-//   pointerEvents: "none",
+// <Menu
+// id="fade-menu"
+// MenuListProps={{
+//   "aria-labelledby": "fade-button",
+//   onMouseLeave: handlePopoverClose,
 // }}
-// open={open}
 // anchorEl={anchorEl}
-// anchorOrigin={{
-//   vertical: "bottom",
-//   horizontal: "center",
-// }}
-// transformOrigin={{
-//   vertical: "top",
-//   horizontal: "center",
-// }}
+// open={open}
 // onClose={handlePopoverClose}
-// disableRestoreFocus
+// TransitionComponent={Fade}
 // >
-// </Popover>
+// {rows.map((list) => (
+//   <MenuItem key={list.women} onClick={handlePopoverClose}>
+//     {list.women}
+//   </MenuItem>
+// ))}
+// </Menu>

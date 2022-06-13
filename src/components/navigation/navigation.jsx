@@ -181,6 +181,7 @@ const Navigation = () => {
           </Toolbar>
         </Container>
       </AppBar>
+      <br />
       <NavigationBar />
       <Outlet />
     </Fragment>
