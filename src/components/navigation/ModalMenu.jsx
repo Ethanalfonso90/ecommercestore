@@ -1,51 +1,91 @@
-// import { useState } from "react";
-import Menu from "@mui/material/Menu";
+import * as React from "react";
+// import Button from "@mui/material/Button";
+import ClickAwayListener from "@mui/material/ClickAwayListener";
+import Grow from "@mui/material/Grow";
+import Paper from "@mui/material/Paper";
+import Popper from "@mui/material/Popper";
 import MenuItem from "@mui/material/MenuItem";
-import Fade from "@mui/material/Fade";
+import MenuList from "@mui/material/MenuList";
+import Stack from "@mui/material/Stack";
 
-function createData(women, men, brand, era, size) {
-  return { women, men, brand, era, size };
-}
+export default function MenuLink(props) {
+  const { open, anchorEl, rows } = props;
+  const [openEL, setOpen] = React.useState(false);
+  const anchorRef = React.useRef(null);
+  // const handleToggle = () => {
+  //   setOpen((prevOpen) => !prevOpen);
+  // };
 
-const rows = [
-  createData("ALL WOMEN'S SALE", 159, 6.0, 24, 4.0),
-  createData("BLOUSES & TOPS", 237, 9.0, 37, 4.3),
-  createData("COATS", 262, 16.0, 24, 6.0),
-  createData("DRESSES", 305, 3.7, 67, 4.3),
-  createData("JACKETS", 356, 16.0, 49, 3.9),
-  createData("JEANS", 159, 6.0, 24, 4.0),
-  createData("KNITS", 237, 9.0, 37, 4.3),
-  createData("SHORTS", 262, 16.0, 24, 6.0),
-  createData("SKIRTS", 305, 3.7, 67, 4.3),
-  createData("SWEATSHIRTS", 356, 16.0, 49, 3.9),
-  createData("SWIMWEAR", 262, 16.0, 24, 6.0),
-  createData("T-SHIRTS", 305, 3.7, 67, 4.3),
-  createData("TROUSERS", 356, 16.0, 49, 3.9),
-];
+  const handleClose = (event) => {
+    if (anchorRef.current && anchorRef.current.contains(event.target)) {
+      return;
+    }
 
-export default function ModalMenu(props) {
-  const { anchorEl } = props;
-  const open = Boolean(anchorEl);
-
-  const handleClose = () => {
-    // setAnchorEl(null);
+    setOpen(false);
   };
+
+  function handleListKeyDown(event) {
+    if (event.key === "Tab") {
+      event.preventDefault();
+      // setOpen(false);
+    } else if (event.key === "Escape") {
+      // setOpen(false);
+    }
+  }
+
+  // return focus to the button when we transitioned from !open -> open
+  const prevOpen = React.useRef(open);
+  React.useEffect(() => {
+    if (prevOpen.current === true && open === false) {
+      anchorRef.current.focus();
+    }
+
+    prevOpen.current = open;
+  }, [open, openEL]);
+
   return (
-    <Menu
-      id="fade-menu"
-      MenuListProps={{
-        "aria-labelledby": "fade-button",
-      }}
-      anchorEl={anchorEl}
-      open={open}
-      onClose={handleClose}
-      TransitionComponent={Fade}
-    >
-      {rows.map((list) => (
-        <MenuItem key={list.women} onClick={handleClose}>
-          {list.women}
-        </MenuItem>
-      ))}
-    </Menu>
+    <Stack direction="row" spacing={2}>
+      <div>
+        <Popper
+          open={open ? open : openEL}
+          anchorEl={anchorEl}
+          role={undefined}
+          placement="bottom-start"
+          transition
+          disablePortal
+        >
+          {({ TransitionProps, placement }) => (
+            <Grow
+              {...TransitionProps}
+              style={{
+                transformOrigin:
+                  placement === "bottom-start" ? "left top" : "left bottom",
+              }}
+            >
+              <Paper>
+                <ClickAwayListener onClickAway={handleClose}>
+                  <MenuList
+                    autoFocusItem={open}
+                    id="composition-menu"
+                    aria-labelledby="composition-button"
+                    onKeyDown={handleListKeyDown}
+                    onMouseLeave={handleClose}
+                  >
+                    {rows.map((tab) => {
+                      console.log(tab);
+                      return (
+                        <MenuItem key={tab.women} onClick={handleClose}>
+                          {tab.women}
+                        </MenuItem>
+                      );
+                    })}
+                  </MenuList>
+                </ClickAwayListener>
+              </Paper>
+            </Grow>
+          )}
+        </Popper>
+      </div>
+    </Stack>
   );
 }
